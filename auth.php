@@ -1,12 +1,12 @@
 <?php
 require 'db.php';
 
-// SIGN UP LOGIC
+// sign up logic
 if (isset($_POST['signup'])) {
     $user = $_POST['username'];
     $email = $_POST['email'];
     $pass = password_hash($_POST['password'], PASSWORD_DEFAULT);
-    $seed = bin2hex(random_bytes(5)); // Random avatar seed
+    $seed = bin2hex(random_bytes(5)); // random avatar seed
 
     $stmt = $pdo->prepare("INSERT INTO users (username, email, password, avatar_seed) VALUES (?, ?, ?, ?)");
     
@@ -15,7 +15,7 @@ if (isset($_POST['signup'])) {
     }
 }
 
-// LOGIN LOGIC
+// login logic
 if (isset($_POST['login'])) {
     $email = $_POST['email'];
     $pass = $_POST['password'];
@@ -34,7 +34,7 @@ if (isset($_POST['login'])) {
     }
 }
 
-// LOGOUT LOGIC
+// logout logic
 if (isset($_GET['logout'])) {
     session_destroy();
     header("Location: index.php");
