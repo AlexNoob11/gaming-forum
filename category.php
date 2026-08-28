@@ -2,7 +2,6 @@
 require 'db.php';
 
 // REMOVED GATEKEEPER: Page is now public.
-
 // Check if logged in for UI personalization
 $is_logged_in = isset($_SESSION['user_id']);
 $username = $is_logged_in ? htmlspecialchars($_SESSION['username']) : 'Guest';
