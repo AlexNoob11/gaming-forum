@@ -1,8 +1,8 @@
 <?php
 $host = 'localhost';
 $dbname = 'gaming_forum';
-$user = 'root'; // Default XAMPP user
-$pass = '';     // Default XAMPP password
+$user = 'root';
+$pass = '';
 
 try {
     $pdo = new PDO("mysql:host=$host;dbname=$dbname", $user, $pass);
