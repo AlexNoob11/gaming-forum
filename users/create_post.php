@@ -1,8 +1,6 @@
 <?php
 require 'db.php';
 
-// No need for session_start() here, it's already in db.php!
-
 // GATEKEEPER: Redirect if not logged in
 if (!isset($_SESSION['user_id'])) {
     header("Location: index.php?error=unauthorized");
@@ -15,7 +13,6 @@ $user_id = $_SESSION['user_id'];
 
 // --- DATABASE LOGIC (PDO VERSION) ---
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // 1. Collect Input
     $category = $_POST['category'] ?? '';
     $tags     = $_POST['tags'] ?? '';
     $title    = $_POST['title'] ?? '';
@@ -24,13 +21,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // 2. Validate
     if (!empty($title) && !empty($content)) {
         try {
-            // 3. Prepare SQL using PDO
+            // Prepare SQL using PDO
             $sql = "INSERT INTO threads (user_id, category, tags, title, content, created_at) 
                     VALUES (:user_id, :category, :tags, :title, :content, NOW())";
             
             $stmt = $pdo->prepare($sql);
             
-            // 4. Execute with bound parameters (Safe from SQL Injection)
             $stmt->execute([
                 ':user_id'  => $user_id,
                 ':category' => $category,
